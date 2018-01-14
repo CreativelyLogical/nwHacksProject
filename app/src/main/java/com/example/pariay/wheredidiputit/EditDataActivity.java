@@ -3,16 +3,24 @@ package com.example.pariay.wheredidiputit;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
 public class EditDataActivity extends AppCompatActivity {
 
+    public static final String TAG = "editActivity";
+
     private int selectedID;
     private String selectedName;
     private String selectedLocation;
+
+    DataBaseHelper mDataBaseHelper;
 
 
 
@@ -21,8 +29,14 @@ public class EditDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_data);
 
-        EditText itemName = (EditText) findViewById(R.id.nameEdit);
-        EditText itemLocation = (EditText) findViewById(R.id.locationEdit);
+        final EditText itemName = (EditText) findViewById(R.id.nameEdit);
+        final EditText itemLocation = (EditText) findViewById(R.id.locationEdit);
+
+        Button btnSave = (Button) findViewById(R.id.save);
+
+        Button btnDelete = (Button) findViewById(R.id.delete);
+
+        mDataBaseHelper = new DataBaseHelper(this);
 
         Intent receivedIntent = getIntent();
 
@@ -33,6 +47,53 @@ public class EditDataActivity extends AppCompatActivity {
         itemName.setHint(selectedName);
         itemLocation.setHint(selectedLocation);
 
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String nameText = itemName.getText().toString();
+                String locationText = itemLocation.getText().toString();
+
+                if (nameText.length() == 0 && locationText.length() > 0) {
+                    mDataBaseHelper.updateTable(null, locationText, selectedID);
+                    toastMessage("Table updated");
+                    onBackPressed();
+                }
+                else if (nameText.length() > 0 && locationText.length() > 0) {
+                    mDataBaseHelper.updateTable(nameText, locationText, selectedID);
+                    toastMessage("Table updated");
+                    onBackPressed();
+                }
+                else if (nameText.length() == 0 && locationText.length() == 0) {
+                    toastMessage("No changes committed");
+                    onBackPressed();
+                }
+                while (nameText.length() > 0 && locationText.length() == 0) {
+                    toastMessage("Please enter a location");
+                    if (locationText.length() > 0) {
+                        mDataBaseHelper.updateTable(nameText, locationText, selectedID);
+                        break;
+                    }
+                }
+                Log.d(TAG, "Whats going on");
+                onBackPressed();
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDataBaseHelper.deleteRow(selectedID);
+                toastMessage("Removed from database");
+                onBackPressed();
+            }
+        });
+
+
+
+    }
+    public void toastMessage(String message) {
+
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
     }
 }

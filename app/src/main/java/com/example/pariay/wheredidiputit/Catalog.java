@@ -56,7 +56,7 @@ public class Catalog extends AppCompatActivity {
         // returns all the rows of the database
         Cursor data = mDataBaseHelper.getData();
 
-        toastMessage("Btw, there are " + data.getColumnCount() + " columns in our table");
+//        toastMessage("Btw, there are " + data.getColumnCount() + " columns in our table");
 
         Items.itemName.clear();
         Items.itemLocation.clear();
@@ -79,7 +79,7 @@ public class Catalog extends AppCompatActivity {
                 Log.d(TAG, "hello world");
                 int itemId = -1;
 
-                toastMessage("Btw, the column count is " + row.getColumnCount());
+//                toastMessage("Btw, the column count is " + row.getColumnCount());
 
                 String itemLocation = "";
 
@@ -117,7 +117,6 @@ public class Catalog extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.action_add:
-                toastMessage("action item selected");
                 Intent toAddMenu = new Intent(this, AddItems.class);
                 startActivity(toAddMenu);
                 return true;

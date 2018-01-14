@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by Pariay on 2018-01-13.
@@ -77,6 +78,35 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void deleteAll() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME);
+    }
+
+    public void updateTable(String newName, String newLocation, int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        String query = "";
+        if (newName == null) {
+            Log.d(TAG, "We've reached here atleast");
+            query = "UPDATE " + TABLE_NAME + " SET " + COL2 +
+                    " = '" + newLocation + "' WHERE ID = '" + id + "'";
+//            cv.put(COL2, newLocation);
+            db.execSQL(query);
+        } else {
+            Log.d(TAG, "We're trying to change 2 columns");
+            query = "UPDATE " + TABLE_NAME + " SET " + COL1 +
+                    " = '" + newName + "', " + COL2 + " = '" +
+                    newLocation + "' WHERE " + COL0 + " = " + id
+                    + "";
+            db.execSQL(query);
+        }
+
+//        db.update(TABLE_NAME, cv, "_id="+id, null);
+
+    }
+
+    public void deleteRow(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE ID = '" + id + "'";
+        db.execSQL(query);
     }
 
 }

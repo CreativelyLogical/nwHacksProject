@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                toastMessage("You're really gonna delete everything huh, savage");
                 mDataBaseHelper.deleteAll();
-                toastMessage("All entries in table deleted and table dropped");
+                toastMessage("All entries in deleted");
             }
         });
     }
