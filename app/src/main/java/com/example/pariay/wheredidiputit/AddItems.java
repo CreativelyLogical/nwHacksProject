@@ -10,6 +10,10 @@ import android.widget.Toast;
 
 public class AddItems extends AppCompatActivity {
 
+    DataBaseHelper mDataBaseHelper;
+
+    public static final String TAG = "AddDataActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +24,8 @@ public class AddItems extends AppCompatActivity {
         final EditText itemLocation = (EditText) findViewById(R.id.itemLocation);
 
         Button addItem = (Button) findViewById(R.id.addItem);
+
+        mDataBaseHelper = new DataBaseHelper(this);
 
         addItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,16 +43,24 @@ public class AddItems extends AppCompatActivity {
                     toastMessage("Please enter something");
                 }
                 else {
-                    Items.itemName.add(item);
-                    Items.itemLocation.add(location);
-                    toastMessage("Item added");
+//                    Items.itemName.add(item);
+//                    Items.itemLocation.add(location);
+                    addData(item, location);
+//                    toastMessage("Item added");
                     Intent backToCatalog = new Intent(AddItems.this, Catalog.class);
                     startActivity(backToCatalog);
                 }
             }
         });
+    }
 
-
+    public void addData(String item, String location) {
+        boolean insertData = mDataBaseHelper.addData(item, location);
+        if (insertData) {
+            toastMessage("Insertion successful");
+        } else {
+            toastMessage("Something went wrong");
+        }
     }
 
     public void toastMessage(String message) {

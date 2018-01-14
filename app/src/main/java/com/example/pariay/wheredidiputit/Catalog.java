@@ -1,6 +1,7 @@
 package com.example.pariay.wheredidiputit;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,6 +14,9 @@ import java.util.List;
 
 public class Catalog extends AppCompatActivity {
 
+    DataBaseHelper mDataBaseHelper;
+
+    public static final String TAG = "listViewActivity";
 
 
     @Override
@@ -21,15 +25,32 @@ public class Catalog extends AppCompatActivity {
         setContentView(R.layout.activity_catalog);
         setTitle("Where Did I Put It?");
 
+        mDataBaseHelper = new DataBaseHelper(this);
+
         ListView listView = (ListView) findViewById(R.id.listView);
 
 //        Items.itemName.add("foo");
 //        Items.itemName.add("bar");
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,
-                Items.itemName);
-        listView.setAdapter(arrayAdapter);
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_list_item_1,
+//                Items.itemName);
+        populateListView();
+//        listView.setAdapter(arrayAdapter);
+    }
+
+    public void populateListView() {
+        // returns all the rows of the database
+        Cursor data = mDataBaseHelper.getData();
+
+        while (data.moveToNext()) {
+            // Iterate through our database(row by row) using a cursor
+            Items.itemName.add(data.getString(1));
+            Items.itemLocation.add(data.getString(2));
+        }
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Items.itemName);
+
     }
 
     @Override
@@ -50,6 +71,7 @@ public class Catalog extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
     public void toastMessage(String message) {
 
