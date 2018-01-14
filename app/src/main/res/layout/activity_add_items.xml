@@ -37,4 +37,26 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="73dp"
         android:text="Add Item" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/itemLocation"
+        android:layout_alignLeft="@+id/itemToAdd"
+        android:layout_alignStart="@+id/itemToAdd"
+        android:layout_marginBottom="50dp"
+        android:text="Enter the item to add below:"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/itemLocation"
+        android:layout_alignStart="@+id/itemLocation"
+        android:layout_below="@+id/itemToAdd"
+        android:layout_marginTop="45dp"
+        android:text="Enter the latest item location below:"
+        android:textColor="@android:color/black" />
 </RelativeLayout>

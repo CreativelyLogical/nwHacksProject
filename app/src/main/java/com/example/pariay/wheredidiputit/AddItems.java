@@ -50,9 +50,9 @@ public class AddItems extends AppCompatActivity {
 //                    Items.itemName.add(item);
 //                    Items.itemLocation.add(location);
                     addData(item, location);
+                    onBackPressed();
 //                    toastMessage("Item added");
-                    Intent backToCatalog = new Intent(AddItems.this, Catalog.class);
-                    startActivity(backToCatalog);
+
                 }
             }
         });

@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -60,9 +63,16 @@ public class Catalog extends AppCompatActivity {
             Items.itemLocation.add(data.getString(2));
         }
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Items.itemName);
+        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Items.itemName);
 
-        listView.setAdapter(arrayAdapter);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                toastMessage("you clicked on a listview");
+            }
+        });
     }
 
     @Override
