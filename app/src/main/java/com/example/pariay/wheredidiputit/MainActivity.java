@@ -1,8 +1,10 @@
 package com.example.pariay.wheredidiputit;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -37,11 +39,26 @@ public class MainActivity extends AppCompatActivity {
         deleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                toastMessage("You're really gonna delete everything huh, savage");
+//                toastMessage("You're really gonna delete everything huh, savage");
+                mDataBaseHelper.deleteAll();
+                toastMessage("All entries in table deleted and table dropped");
             }
         });
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+//            toastMessage("Back button pressed");
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            return false;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+    }
 
     public void toastMessage(String message) {
 

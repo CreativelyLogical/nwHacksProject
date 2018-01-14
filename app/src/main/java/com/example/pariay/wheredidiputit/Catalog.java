@@ -1,9 +1,11 @@
 package com.example.pariay.wheredidiputit;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -18,6 +20,8 @@ public class Catalog extends AppCompatActivity {
 
     public static final String TAG = "listViewActivity";
 
+    ListView listView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +31,12 @@ public class Catalog extends AppCompatActivity {
 
         mDataBaseHelper = new DataBaseHelper(this);
 
-        ListView listView = (ListView) findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
 //        Items.itemName.add("foo");
 //        Items.itemName.add("bar");
@@ -43,6 +52,8 @@ public class Catalog extends AppCompatActivity {
         // returns all the rows of the database
         Cursor data = mDataBaseHelper.getData();
 
+        Items.itemName.clear();
+        Items.itemLocation.clear();
         while (data.moveToNext()) {
             // Iterate through our database(row by row) using a cursor
             Items.itemName.add(data.getString(1));
@@ -51,6 +62,7 @@ public class Catalog extends AppCompatActivity {
 
         ArrayAdapter arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Items.itemName);
 
+        listView.setAdapter(arrayAdapter);
     }
 
     @Override
@@ -67,9 +79,25 @@ public class Catalog extends AppCompatActivity {
                 toastMessage("action item selected");
                 Intent toAddMenu = new Intent(this, AddItems.class);
                 startActivity(toAddMenu);
+                return true;
+            case android.R.id.home:
+                this.finish();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            //toastMessage("Back button pressed");
+            Intent back = new Intent(Catalog.this, MainActivity.class);
+            startActivity(back);
+            return false;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
     }
 
 

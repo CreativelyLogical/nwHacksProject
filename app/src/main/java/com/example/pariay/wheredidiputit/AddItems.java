@@ -3,6 +3,7 @@ package com.example.pariay.wheredidiputit;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,9 @@ public class AddItems extends AppCompatActivity {
         Button addItem = (Button) findViewById(R.id.addItem);
 
         mDataBaseHelper = new DataBaseHelper(this);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         addItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +56,16 @@ public class AddItems extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void addData(String item, String location) {
