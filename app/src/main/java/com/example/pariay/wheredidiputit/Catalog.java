@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,6 +56,8 @@ public class Catalog extends AppCompatActivity {
         // returns all the rows of the database
         Cursor data = mDataBaseHelper.getData();
 
+        toastMessage("Btw, there are " + data.getColumnCount() + " columns in our table");
+
         Items.itemName.clear();
         Items.itemLocation.clear();
         while (data.moveToNext()) {
@@ -71,15 +74,26 @@ public class Catalog extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String name = adapterView.getItemAtPosition(i).toString();
-                toastMessage("you clicked on a listview");
-                Cursor data = mDataBaseHelper.getItemID(name);
+                //toastMessage("you clicked on a listview");
+                Cursor row = mDataBaseHelper.getRow(name);
+                Log.d(TAG, "hello world");
                 int itemId = -1;
+
+                toastMessage("Btw, the column count is " + row.getColumnCount());
+
                 String itemLocation = "";
-                while (data.moveToNext()) {
-                    itemId = data.getInt(0);
-                    itemLocation = data.getString(2);
+
+//                toastMessage("The column count is " + data.getColumnCount());
+
+                while (row.moveToNext()) {
+                    itemId = row.getInt(0);
+                    itemLocation = row.getString(2);
+                    Log.d(TAG, "the itemID is " + itemId);
+                    //itemLocation = data.getString(2);
+                    //toastMessage("The itemLocation tho is " + itemLocation);
                 }
                 if (itemId > -1) {
+
                     Intent editScreenIntent = new Intent(Catalog.this, EditDataActivity.class);
                     editScreenIntent.putExtra("id", itemId);
                     editScreenIntent.putExtra("name", name);
