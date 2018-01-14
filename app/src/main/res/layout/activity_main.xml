@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.pariay.wheredidiputit.MainActivity"
-    android:background="@drawable/background">>
+    android:background="@drawable/fade">>
 
 
     <ImageView
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="59dp"
+        android:layout_marginTop="58dp"
         android:fontFamily="casual"
         android:text="Where Did I Put It "
         android:textAllCaps="false"

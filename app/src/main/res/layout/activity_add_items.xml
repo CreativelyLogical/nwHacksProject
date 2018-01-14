@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.pariay.wheredidiputit.AddItems">
+    tools:context="com.example.pariay.wheredidiputit.AddItems"
+    android:background="@drawable/fade">
 
     <EditText
         android:id="@+id/itemToAdd"
@@ -14,8 +15,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="108dp"
         android:ems="10"
+        android:fontFamily="casual"
+        android:hint="Item to Add"
         android:inputType="textPersonName"
-        android:hint="Item to Add"/>
+        android:textColor="@android:color/background_light" />
 
     <EditText
         android:id="@+id/itemLocation"
@@ -26,8 +29,10 @@
         android:layout_below="@+id/itemToAdd"
         android:layout_marginTop="66dp"
         android:ems="10"
+        android:fontFamily="casual"
+        android:hint="Item Location"
         android:inputType="textPersonName"
-        android:hint="Item Location"/>
+        android:textColor="@android:color/background_light" />
 
     <Button
         android:id="@+id/addItem"
@@ -47,7 +52,7 @@
         android:layout_alignStart="@+id/itemToAdd"
         android:layout_marginBottom="50dp"
         android:text="Enter the item to add below:"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/background_light" />
 
     <TextView
         android:id="@+id/textView4"
@@ -58,5 +63,5 @@
         android:layout_below="@+id/itemToAdd"
         android:layout_marginTop="45dp"
         android:text="Enter the latest item location below:"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/background_light" />
 </RelativeLayout>

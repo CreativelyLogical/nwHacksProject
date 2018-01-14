@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.pariay.wheredidiputit.EditDataActivity">
+    tools:context="com.example.pariay.wheredidiputit.EditDataActivity"
+    android:background="@drawable/fade">
 
     <TextView
         android:id="@+id/name"
@@ -16,7 +17,7 @@
         android:layout_marginTop="149dp"
         android:fontFamily="casual"
         android:text=" Item Name: "
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/background_light"
         android:textSize="20sp" />
 
     <TextView
@@ -29,7 +30,7 @@
         android:layout_marginTop="54dp"
         android:fontFamily="casual"
         android:text=" Item Location: "
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/background_light"
         android:textSize="20sp" />
 
     <Button
@@ -62,7 +63,7 @@
         android:layout_marginTop="63dp"
         android:fontFamily="casual"
         android:text="EDIT/DELETE SCREEN"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/background_light"
         android:textSize="30sp" />
 
     <EditText
@@ -74,7 +75,9 @@
         android:layout_toEndOf="@+id/location"
         android:layout_toRightOf="@+id/location"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:fontFamily="casual"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/background_light" />
 
     <EditText
         android:id="@+id/nameEdit"
@@ -85,5 +88,7 @@
         android:layout_toEndOf="@+id/name"
         android:layout_toRightOf="@+id/name"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:fontFamily="casual"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/background_light" />
 </RelativeLayout>

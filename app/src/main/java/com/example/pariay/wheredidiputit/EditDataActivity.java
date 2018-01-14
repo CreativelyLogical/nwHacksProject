@@ -63,19 +63,16 @@ public class EditDataActivity extends AppCompatActivity {
                     toastMessage("Table updated");
                     onBackPressed();
                 }
-                else if (nameText.length() == 0 && locationText.length() == 0) {
+                else if (nameText.length() > 0 && locationText.length() == 0) {
+                    toastMessage("Please enter a location");
+                }
+                else {
                     toastMessage("No changes committed");
                     onBackPressed();
                 }
-                while (nameText.length() > 0 && locationText.length() == 0) {
-                    toastMessage("Please enter a location");
-                    if (locationText.length() > 0) {
-                        mDataBaseHelper.updateTable(nameText, locationText, selectedID);
-                        break;
-                    }
-                }
+
                 Log.d(TAG, "Whats going on");
-                onBackPressed();
+                //onBackPressed();
             }
         });
 
