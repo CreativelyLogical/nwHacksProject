@@ -70,7 +70,24 @@ public class Catalog extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String name = adapterView.getItemAtPosition(i).toString();
                 toastMessage("you clicked on a listview");
+                Cursor data = mDataBaseHelper.getItemID(name);
+                int itemId = -1;
+                String itemLocation = "";
+                while (data.moveToNext()) {
+                    itemId = data.getInt(0);
+                    itemLocation = data.getString(2);
+                }
+                if (itemId > -1) {
+                    Intent editScreenIntent = new Intent(Catalog.this, EditDataActivity.class);
+                    editScreenIntent.putExtra("id", itemId);
+                    editScreenIntent.putExtra("name", name);
+                    editScreenIntent.putExtra("location", itemLocation);
+                    startActivity(editScreenIntent);
+                } else {
+                    toastMessage("No ID associated with that name");
+                }
             }
         });
     }
