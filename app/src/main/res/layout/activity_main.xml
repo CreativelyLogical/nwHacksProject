@@ -51,5 +51,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="21dp"
-        android:text="Delete All Data" />
+        android:text="Delete All Data"
+        />
 </RelativeLayout>

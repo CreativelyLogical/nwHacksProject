@@ -19,6 +19,7 @@ public class AddItems extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_items);
+        setTitle("Where Did I Put It?");
 
         final EditText itemToAdd = (EditText) findViewById(R.id.itemToAdd);
 
